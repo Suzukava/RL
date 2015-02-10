@@ -8,6 +8,14 @@ public:
 	~Engine();
 	void update();
 	void render();
+
+	enum GameStaus{
+		STARTUP,
+		IDLE,
+		NEW_TURN,
+		VICTORY,
+		DEFEAT
+	}gameStatus;
 private:
 	bool computeFov;
 };
