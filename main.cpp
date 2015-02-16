@@ -1,10 +1,8 @@
 #include <libtcod.hpp>
-#include "Actor.h"
-#include "Map.h"
-#include "Engine.h"
+#include "main.h"
 
 
-Engine engine;
+Engine engine(80, 50);
 
 
 int main(){
