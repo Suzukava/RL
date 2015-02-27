@@ -1,1 +1,1 @@
-# Creating my first Roguelike game as training
+#Roguelike game for training
