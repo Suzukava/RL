@@ -44,14 +44,14 @@ bool PlayerAi::moveOrAttack(Actor *owner, int targetx, int targety){
 		
 		if (actor->destructible && !actor->destructible->isDead() && actor->x == targetx && actor->y == targety){
 			owner->attacker->attack(owner, actor);
-			//printf("The %s laughs at your puny efforts to attack him \n", actor->name);
+			//engine.gui->message(TCODColor::lightGrey, "The %s laughs at your puny efforts to attack him \n", actor->name);
 			return false;
 		}
 	}
 	for (Actor **iterator = engine.actors.begin(); iterator != engine.actors.end(); iterator++){
 		Actor *actor = *iterator;
 		if (actor->destructible && actor->destructible->isDead() && actor->x == targetx && actor->y == targety){
-			printf("There is %s\n", actor->name);
+			engine.gui->message(TCODColor::lightGrey, "There is %s\n", actor->name);
 		}
 	}
 	owner->x = targetx;

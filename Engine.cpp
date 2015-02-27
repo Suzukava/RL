@@ -2,7 +2,6 @@
 #include "main.h"
 
 
-
 Engine::Engine(int screenWidth, int screenHeight) : gameStatus(STARTUP), fovRadius(10), screenWidth(screenWidth),screenHeight(screenHeight) {
 	
 	TCODConsole::initRoot(screenWidth,screenHeight, "RL on libtcod", false);
@@ -12,12 +11,15 @@ Engine::Engine(int screenWidth, int screenHeight) : gameStatus(STARTUP), fovRadi
 	player->ai = new PlayerAi();
 	actors.push(player);
 	map = new Map(80, 50);
+	gui = new Gui();
+	gui->message(TCODColor::red, "Welcome stranger!\nPrepare to die.");
 }
 
 
 Engine::~Engine() {
     actors.clearAndDelete();
     delete map;
+	delete gui;
 }
 
 void Engine::update(){
@@ -58,6 +60,8 @@ void Engine::render() {
 				}
 		}
 		player->render();
-		TCODConsole::root->print(1, screenHeight-2, "HP : %d/%d", (int)player->destructible->hp, (int) player->destructible->maxHp);
+		//show the player stats
+		gui->render();
+		//TCODConsole::root->print(1, screenHeight-2, "HP : %d/%d", (int)player->destructible->hp, (int) player->destructible->maxHp);
 		
 }

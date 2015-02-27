@@ -13,7 +13,8 @@ public:
 	int fovRadius;
 	int screenWidth;
 	int screenHeight;
-	TCOD_key_t lastKey;
+	TCOD_key_t lastKey;		
+	Gui *gui;
 
 	Engine(int screenWidth, int screenHeight);
 	~Engine();
