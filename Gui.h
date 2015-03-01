@@ -7,6 +7,7 @@ public:
 
 	void message(const TCODColor &col, const char *text, ...);
 
+	void renderMouseLook();
 
 protected:
 	TCODConsole *con;

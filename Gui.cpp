@@ -66,6 +66,31 @@ void Gui::message(const TCODColor &col, const char *text, ...) {
 
 }
 
+void Gui::renderMouseLook() {
+	if (! engine.map->isInFov(engine.mouse.cx, engine.mouse.cy)){
+		//if mouse is out of fov, nothing to render
+		return;
+	}
+
+	char buf[128] = "";
+	bool first=true;
+	for (Actor **it = engine.actors.begin(); it != engine.actors.end(); it++){
+		Actor *actor = *it;
+		// find actors under the mouse corsor
+		if (actor->x == engine.mouse.cx && actor->y == engine.mouse.cy){
+			if (! first) {
+				strcat(buf, ", ");
+			} 
+			else {
+				first = false;
+			}
+			strcat(buf, actor->name);
+		}
+	}
+	con->setDefaultForeground(TCODColor::lightGrey);
+	con->print(1,0,buf);
+}
+
 
 void Gui::render() {
 	//clear the Gui console
@@ -89,6 +114,8 @@ void Gui::render() {
 			colorCoef += 0.3f;
 		}
 	}
+
+	renderMouseLook();
 
 	// blit the Gui console on the rot console
 	TCODConsole::blit(con, 0, 0, engine.screenWidth, PANEL_HEIGHT, TCODConsole::root, 0, engine.screenHeight - PANEL_HEIGHT);

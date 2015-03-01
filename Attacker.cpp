@@ -19,3 +19,7 @@ void Attacker:: attack(Actor *owner, Actor *target) {
 		engine.gui->message(TCODColor::lightGrey, "%s is attack %s in vain.\n", owner->name, target->name);
 	}
 }
+
+int rollDamage(char *dice) {
+	return 4;
+}
