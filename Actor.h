@@ -9,8 +9,12 @@ class Actor {
 		Attacker *attacker; // something that deals damages
 		Destructible *destructible; //something that can be damaged
 		Ai *ai; // something self-update
+		Pickable *pickable;
+		Container *container;
+
 
 		Actor(int x, int y, int ch, const char *name, const TCODColor &col);
+		~Actor();
 		void update();
 		//bool moveOrAttack(int x, int y);
 		void render() const;

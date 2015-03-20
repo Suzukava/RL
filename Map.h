@@ -14,6 +14,7 @@ public:
 	bool isInFov(int x, int y) const;
 	bool isExplored(int x, int y) const;
 	void computeFov();
+	void addItem(int x, int y);
 
 	void render() const;
 protected:

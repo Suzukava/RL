@@ -5,6 +5,8 @@
 static const int ROOM_MAX_SIZE = 12;
 static const int ROOM_MIN_SIZE = 6;
 static const int MAX_ROOM_MONSTERS = 3;
+static const int MAX_ROOM_ITEMS = 2;
+
 
 class BspListener : public ITCODBspCallback{
 private:
@@ -119,6 +121,8 @@ void Map::createRoom(bool first, int x1, int y1, int x2, int y2){
 	}
 	else{
 		TCODRandom *rng = TCODRandom::getInstance();
+
+		//add monsters
 		int nbMonsters = rng->getInt(0, MAX_ROOM_MONSTERS);
 		while(nbMonsters > 0){
 			int x = rng->getInt(x1, x2);
@@ -127,6 +131,17 @@ void Map::createRoom(bool first, int x1, int y1, int x2, int y2){
 				addMonster(x,y);
 			}
 			nbMonsters--;
+		}
+
+		//add items
+		int nbItems = rng->getInt(0, MAX_ROOM_ITEMS);
+		while(nbItems > 0) {
+			int x = rng->getInt(x1, x2);
+			int y = rng->getInt(y1, y2);
+			if(canWalk(x, y)) {
+				addItem(x, y);
+			}
+			nbItems--;
 		}
 	}
 }
@@ -151,6 +166,12 @@ void Map::addMonster(int x, int y){
 	}
 }
 
+void Map::addItem(int x, int y){
+	Actor *healPotion = new Actor(x, y, '!', "heal potion", TCODColor::violet);
+	healPotion->blocks = false;
+	healPotion->pickable = new Healer(4);
+	engine.actors.push(healPotion);
+}
 
 void Map::render() const {
 	static const TCODColor darkWall(0,0,100);

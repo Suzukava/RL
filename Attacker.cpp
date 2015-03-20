@@ -20,6 +20,3 @@ void Attacker:: attack(Actor *owner, Actor *target) {
 	}
 }
 
-int rollDamage(char *dice) {
-	return 4;
-}
