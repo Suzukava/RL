@@ -23,3 +23,12 @@ protected:
 	int moveCount;
 	void moveOrAttack(Actor *owner, int targtx, int targety);
 };
+
+class ConfuseMonsterAi : public Ai {
+public:
+	ConfuseMonsterAi(int nbTurns, Ai *oldAi);
+	void update(Actor *owner);
+protected:
+	int nbTurns;
+	Ai *oldAi;
+};

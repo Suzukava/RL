@@ -12,6 +12,7 @@ class Actor {
 		Pickable *pickable;
 		Container *container;
 
+		float getDistance(int cx, int cy) const;
 
 		Actor(int x, int y, int ch, const char *name, const TCODColor &col);
 		~Actor();
