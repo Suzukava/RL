@@ -11,10 +11,10 @@ int round (double value){
 MonsterAi::MonsterAi() : moveCount(0) {
 }
 
-ConfuseMonsterAi::ConfuseMonsterAi(int nbTurns, Ai *oldAi) : nbTurns(nbTurns), oldAi(oldAi) {
+ConfusedMonsterAi::ConfusedMonsterAi(int nbTurns, Ai *oldAi) : nbTurns(nbTurns), oldAi(oldAi) {
 }
 
-void ConfuseMonsterAi::update(Actor *owner) {
+void ConfusedMonsterAi::update(Actor *owner) {
 	TCODRandom *rng = TCODRandom::getInstance();
 	int dx = rng->getInt(-1, 1);
 	int dy = rng->getInt(-1, 1);

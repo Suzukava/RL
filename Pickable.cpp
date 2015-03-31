@@ -100,7 +100,7 @@ bool Confuser::use(Actor *owner, Actor *wearer) {
 	}
 
 	//confuse the monster for <nbTurns> turns
-	Ai *confusedAi = new ConfuseMonsterAi(nbTurns, actor->ai);
+	Ai *confusedAi = new ConfusedMonsterAi(nbTurns, actor->ai);
 	actor->ai = confusedAi;
 	engine.gui->message(TCODColor::lightGreen, "The eyes of the %s look vacant,\nas he starts to stumble around!", actor->name);
 	return Pickable::use(owner, wearer);

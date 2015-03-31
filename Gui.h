@@ -1,5 +1,5 @@
 
-class Gui {
+class Gui : public Persistent {
 public:
 	Gui();
 	~Gui();
@@ -8,6 +8,9 @@ public:
 	void message(const TCODColor &col, const char *text, ...);
 
 	void renderMouseLook();
+
+	void load(TCODZip &zip);
+    void save(TCODZip &zip);
 
 protected:
 	TCODConsole *con;

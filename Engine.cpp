@@ -4,7 +4,11 @@
 
 Engine::Engine(int screenWidth, int screenHeight) : gameStatus(STARTUP), fovRadius(10), screenWidth(screenWidth),screenHeight(screenHeight) {
 	
-	TCODConsole::initRoot(screenWidth,screenHeight, "RL on libtcod", false);
+	TCODConsole::initRoot(screenWidth,screenHeight, "RL on libtcod", false);	
+	gui = new Gui();
+}
+
+void Engine::init(){
 	player = new Actor(40, 25, '@', "player", TCODColor::white);
 	player->destructible = new PlayerDestructible(30, 2, "you cadaver");
 	player->attacker = new Attacker(5);
@@ -12,11 +16,9 @@ Engine::Engine(int screenWidth, int screenHeight) : gameStatus(STARTUP), fovRadi
 	player->container = new Container(26);
 	actors.push(player);
 	map = new Map(80, 50);
-	gui = new Gui();
+	map->init(true);
 	gui->message(TCODColor::red, "Welcome stranger!\nPrepare to die.");
 }
-
-
 Engine::~Engine() {
     actors.clearAndDelete();
     delete map;
