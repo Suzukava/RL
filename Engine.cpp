@@ -18,11 +18,20 @@ void Engine::init(){
 	map = new Map(80, 50);
 	map->init(true);
 	gui->message(TCODColor::red, "Welcome stranger!\nPrepare to die.");
+	gameStatus = STARTUP;
 }
 Engine::~Engine() {
     actors.clearAndDelete();
-    delete map;
+    term();
 	delete gui;
+}
+
+void Engine::term() {
+	actors.clearAndDelete();
+	if (map) {
+		delete map;
+	}
+	gui->clear();
 }
 
 Actor *Engine::getClosesMonster(int x, int y, float range) const {
@@ -86,6 +95,10 @@ void Engine::update(){
 	gameStatus=IDLE;
 
 	TCODSystem::checkForEvent(TCOD_EVENT_KEY_PRESS | TCOD_EVENT_MOUSE, &lastKey, &mouse);
+	if (lastKey.vk == TCODK_ESCAPE){
+		save();
+		load();
+	}
 	player->update();
 	if (gameStatus == NEW_TURN) {
 		for(Actor **iterator=actors.begin(); iterator != actors.end(); iterator++){

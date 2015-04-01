@@ -1,7 +1,6 @@
 #include <libtcod.hpp>
 class Actor;
 #include "Persistent.h"
-#include "Gui.h"
 #include "Destructible.h"
 #include "Attacker.h"
 #include "Ai.h"
@@ -9,4 +8,5 @@ class Actor;
 #include "Container.h"
 #include "Actor.h"
 #include "Map.h"
+#include "Gui.h"
 #include "Engine.h"

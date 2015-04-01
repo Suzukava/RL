@@ -263,29 +263,46 @@ void Engine::save() {
 
 
 void Engine::load() {
-	if(TCODSystem::fileExists("game.sav")) {
+	engine.gui->menu.clear();
+	engine.gui->menu.addItem(Menu::NEW_GAME,"New game");
+	if ( TCODSystem::fileExists("game.sav")) {
+		engine.gui->menu.addItem(Menu::CONTINUE,"Continue");
+	}
+	engine.gui->menu.addItem(Menu::EXIT,"Exit");
+
+	Menu::MenuItemCode menuItem=engine.gui->menu.pick();
+	if ( menuItem == Menu::EXIT || menuItem == Menu::NONE ) {
+		// Exit or window closed
+		exit(0);
+	} else if ( menuItem == Menu::NEW_GAME ) {
+		// New game
+		engine.term();
+		engine.init();
+	} else {
 		TCODZip zip;
+		// continue a saved game
+		engine.term();
 		zip.loadFromFile("game.sav");
-		//laod the map
-		int width = zip.getInt();
-		int height = zip.getInt();
-		map = new Map(width, height);
+		// load the map
+		int width=zip.getInt();
+		int height=zip.getInt();
+		map = new Map(width,height);
 		map->load(zip);
-		//then the player
-		player = new Actor(0, 0, 0, NULL, TCODColor::white);
-		player->load(zip);
+		// then the player
+		player=new Actor(0,0,0,NULL,TCODColor::white);
 		actors.push(player);
-		//then other
-		int nbActors = zip.getInt();
-		while(nbActors > 0){
-			Actor *actor = new Actor(0, 0, 0, NULL, TCODColor::white);
+		player->load(zip);
+		// then all other actors
+		int nbActors=zip.getInt();
+		while ( nbActors > 0 ) {
+			Actor *actor = new Actor(0,0,0,NULL,TCODColor::white);
 			actor->load(zip);
 			actors.push(actor);
 			nbActors--;
 		}
-		//finally the message log
+		// finally the message log
 		gui->load(zip);
-	} else {
-		engine.init();
+		// to force FOV recomputation
+		gameStatus=STARTUP;
 	}
 }

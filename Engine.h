@@ -21,6 +21,8 @@ public:
 	void load();
 	void save();
 
+	void term();
+
 	Actor *getActor(int x, int y) const;
 	Gui *gui;
 
@@ -29,7 +31,7 @@ public:
 	void update();
 	void render();
 	void sendToBack(Actor *owner);
-
+	
 	
 private:
 	bool computeFov;
