@@ -11,6 +11,7 @@ public:
 	TCOD_mouse_t mouse;
 	TCODList<Actor *> actors;
 	Actor *player;
+	Actor *stairs;
 	Map *map;
 	int fovRadius;
 	int screenWidth;
@@ -22,6 +23,9 @@ public:
 	void save();
 
 	void term();
+
+	int level;
+	void nextLevel();
 
 	Actor *getActor(int x, int y) const;
 	Gui *gui;

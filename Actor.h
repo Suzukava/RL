@@ -6,6 +6,7 @@ class Actor : public Persistent {
 		TCODColor col;
 
 		bool blocks; //can we walk on this actor?
+		bool fovOnly; // only display when is fov
 		Attacker *attacker; // something that deals damages
 		Destructible *destructible; //something that can be damaged
 		Ai *ai; // something self-update
